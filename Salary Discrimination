@@ -1,0 +1,25 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+from sklearn import linear_model
+df = pd.read_fwf("C:/Users/Anoop Kumar/Untitled Folder/salary.txt", header=None, 
+                 names=["Sex", "Rank", "Year", "Degree", "YSdeg", "Salary"])
+with_sex= ['Sex', 'Rank', 'Year', 'Degree', 'YSdeg']
+x = df[with_sex]
+y = df.Salary
+model=linear_model.LinearRegression()
+model.fit(x,y)
+Rsqaure = model.score(x, y)
+print("R-Square Score with Sex: ",Rsqaure)
+print("Intercept: ", model.intercept_)
+print("Coefficients: ", model.coef_)
+without_sex= ['Rank', 'Year', 'Degree', 'YSdeg']
+x = df[without_sex]
+y = df.Salary
+model=linear_model.LinearRegression()
+model.fit(x,y)
+r_sqaure = model.score(x, y)
+print("R-Square witout Sex: ", r_sqaure)
+print("Intercept: ", model.intercept_)
+print("Coefficients: ", model.coef_)
+print("R-Square value is around 0.85 therefore 'Sex' is not a factor for salary.")
